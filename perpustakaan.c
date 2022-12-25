@@ -25,3 +25,30 @@ void cetakqueue();
 void caridata(int cari);
 void hapus();
 void updatedata();
+
+void hapus()
+{
+  int i;
+  int x;
+  cetakqueue();
+  printf("\nHapus No Antrian: ");
+  scanf("%d",&x);
+  for(i = x; i<queue.belakang; i++)
+    {
+      queue.elemen[i] = queue.elemen[i+1];
+    }
+  queue.belakang--;
+  hapusdata();
+  updatedata();
+}
+
+void updatedata()
+{
+  int i;
+  x = fopen("file.txt","a");
+  for(i = 1; i<queue.belakang; i++)
+    {
+      fwrite(&queue.elemen[i], sizeof(queue.elemen[i]),1,x);
+    }
+  fclose(x);
+}
